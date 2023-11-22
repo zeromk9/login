@@ -1,0 +1,400 @@
+RUTA_DEL_ARCHIVO: C:/Users/zerom/Downloads/VS Code/login/login\.dart_tool\dartpad\web_plugin_registrant.dart
+NOMBRE_DEL_ARCHIVO: web_plugin_registrant.dart
+CONTENIDO:
+// Flutter web plugin registrant file.
+//
+// Generated file. Do not edit.
+//
+
+// @dart = 2.13
+// ignore_for_file: type=lint
+
+import 'package:flutter_secure_storage_web/flutter_secure_storage_web.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+
+void registerPlugins([final Registrar? pluginRegistrar]) {
+  final Registrar registrar = pluginRegistrar ?? webPluginRegistrar;
+  FlutterSecureStorageWeb.registerWith(registrar);
+  registrar.registerMessageHandler();
+}
+
+====================================================================================================
+RUTA_DEL_ARCHIVO: C:/Users/zerom/Downloads/VS Code/login/login\.dart_tool\flutter_build\dart_plugin_registrant.dart
+NOMBRE_DEL_ARCHIVO: dart_plugin_registrant.dart
+CONTENIDO:
+//
+// Generated file. Do not edit.
+// This file is generated from template in file `flutter_tools/lib/src/flutter_plugins.dart`.
+//
+
+// @dart = 3.1
+
+import 'dart:io'; // flutter_ignore: dart_io_import.
+import 'package:path_provider_android/path_provider_android.dart';
+import 'package:path_provider_foundation/path_provider_foundation.dart';
+import 'package:path_provider_linux/path_provider_linux.dart';
+import 'package:path_provider_foundation/path_provider_foundation.dart';
+import 'package:flutter_secure_storage_windows/flutter_secure_storage_windows.dart';
+import 'package:path_provider_windows/path_provider_windows.dart';
+
+@pragma('vm:entry-point')
+class _PluginRegistrant {
+
+  @pragma('vm:entry-point')
+  static void register() {
+    if (Platform.isAndroid) {
+      try {
+        PathProviderAndroid.registerWith();
+      } catch (err) {
+        print(
+          '`path_provider_android` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+    } else if (Platform.isIOS) {
+      try {
+        PathProviderFoundation.registerWith();
+      } catch (err) {
+        print(
+          '`path_provider_foundation` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+    } else if (Platform.isLinux) {
+      try {
+        PathProviderLinux.registerWith();
+      } catch (err) {
+        print(
+          '`path_provider_linux` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+    } else if (Platform.isMacOS) {
+      try {
+        PathProviderFoundation.registerWith();
+      } catch (err) {
+        print(
+          '`path_provider_foundation` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+    } else if (Platform.isWindows) {
+      try {
+        FlutterSecureStorageWindows.registerWith();
+      } catch (err) {
+        print(
+          '`flutter_secure_storage_windows` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+      try {
+        PathProviderWindows.registerWith();
+      } catch (err) {
+        print(
+          '`path_provider_windows` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
+      }
+
+    }
+  }
+}
+
+====================================================================================================
+RUTA_DEL_ARCHIVO: C:/Users/zerom/Downloads/VS Code/login/login\lib\main.dart
+NOMBRE_DEL_ARCHIVO: main.dart
+CONTENIDO:
+// ignore_for_file: prefer_const_constructors
+
+import 'package:flutter/material.dart';
+import 'package:login/screens/home_screen.dart';
+import 'package:login/screens/login_screen.dart';
+import 'package:login/screens/registrar_screen.dart';
+
+void main() => runApp(const AppState());
+
+class AppState extends StatelessWidget {
+  const AppState({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'LOGIN',
+      initialRoute: '/home',
+      routes: {
+        '/home': (_) => HomeScreen(),
+        '/login': (_) => LoginScreen(),
+        '/registrar': (_) => RegistrarScreen(),
+      },
+    );
+  }
+}
+
+====================================================================================================
+RUTA_DEL_ARCHIVO: C:/Users/zerom/Downloads/VS Code/login/login\lib\Colors\app_colors.dart
+NOMBRE_DEL_ARCHIVO: app_colors.dart
+CONTENIDO:
+import 'package:flutter/material.dart';
+
+class AppColors {
+  // Colores inspirados en Monster Hunter (alternativos)
+  static const Color primaryColor = Color(0xFFD84315); // Rojo oscuro
+  static const Color accentColor = Color(0xFFBF360C); // Rojo mÃ¡s oscuro
+  static const Color secondaryColor = Color(0xFF37474F); // Gris oscuro/azul
+  static const Color buttonGreenColor = Color(0xFF4CAF50); // Verde oscuro
+  static const Color buttonBrownColor = Color(0xFF795548); // MarrÃ³n oscuro
+}
+
+class AppColorsV2 {
+  // Colores inspirados en Monster Hunter (alternativos)
+  static const Color primaryColor = Color(0xFFad5d5d); // MarrÃ³n
+  static const Color accentColor = Color(0xFFd8ae47); // Amarillo
+  static const Color secondaryColor = Color(0xFF92b6d5); // Azul
+  static const Color buttonGreenColor = Color(0xFF006e51); // Verde
+  static const Color buttonBrownColor = Color(0xFFaf9483); // MarrÃ³n mÃ¡s claro
+}
+
+====================================================================================================
+RUTA_DEL_ARCHIVO: C:/Users/zerom/Downloads/VS Code/login/login\lib\screens\home_screen.dart
+NOMBRE_DEL_ARCHIVO: home_screen.dart
+CONTENIDO:
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+
+import 'package:flutter/material.dart';
+import 'login_screen.dart';
+import 'registrar_screen.dart';
+import 'package:login/Colors/app_colors.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('My App'),
+        backgroundColor: AppColors.primaryColor,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'WELCOME',
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 40),
+            Image.asset(
+              'assets/imgs/login.jpg',
+              height: 150,
+              width: 150,
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                );
+              },
+              child: const Text('LOGIN'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.buttonGreenColor,
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RegistrarScreen()),
+                );
+              },
+              child: const Text('REGISTRAR'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.buttonBrownColor,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+====================================================================================================
+RUTA_DEL_ARCHIVO: C:/Users/zerom/Downloads/VS Code/login/login\lib\screens\login_screen.dart
+NOMBRE_DEL_ARCHIVO: login_screen.dart
+CONTENIDO:
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+
+import 'package:flutter/material.dart';
+import 'registrar_screen.dart';
+import 'package:login/Colors/app_colors.dart';
+
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login'),
+        backgroundColor: AppColors.accentColor,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: const InputDecoration(
+                  hintText: 'Email',
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                obscureText: true,
+                decoration: const InputDecoration(
+                  hintText: 'Password',
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // FunciÃ³n a ejecutar al hacer clic en "LOGIN"
+                // Por ahora, no haremos nada.
+              },
+              child: const Text('LOGIN'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.buttonGreenColor,
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RegistrarScreen()),
+                );
+              },
+              child: const Text('REGISTRAR'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.buttonBrownColor,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+====================================================================================================
+RUTA_DEL_ARCHIVO: C:/Users/zerom/Downloads/VS Code/login/login\lib\screens\registrar_screen.dart
+NOMBRE_DEL_ARCHIVO: registrar_screen.dart
+CONTENIDO:
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+
+import 'package:flutter/material.dart';
+import 'package:login/Colors/app_colors.dart';
+
+class RegistrarScreen extends StatelessWidget {
+  const RegistrarScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Registrar'),
+        backgroundColor: AppColors.secondaryColor,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: const InputDecoration(
+                  hintText: 'Email (Registro)',
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                obscureText: true,
+                decoration: const InputDecoration(
+                  hintText: 'Password (Registro)',
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // FunciÃ³n a ejecutar al hacer clic en "REGISTRAR"
+                // Por ahora, no haremos nada.
+              },
+              child: const Text('REGISTRAR'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.buttonBrownColor,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+====================================================================================================
+RUTA_DEL_ARCHIVO: C:/Users/zerom/Downloads/VS Code/login/login\test\widget_test.dart
+NOMBRE_DEL_ARCHIVO: widget_test.dart
+CONTENIDO:
+/* // This is a basic Flutter widget test.
+//
+// To perform an interaction with a widget in your test, use the WidgetTester
+// utility in the flutter_test package. For example, you can send tap and scroll
+// gestures. You can also use WidgetTester to find child widgets in the widget
+// tree, read text, and verify that the values of widget properties are correct.
+
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:login/main.dart';
+
+void main() {
+  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(const MyApp());
+
+    // Verify that our counter starts at 0.
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsNothing);
+
+    // Tap the '+' icon and trigger a frame.
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
+
+    // Verify that our counter has incremented.
+    expect(find.text('0'), findsNothing);
+    expect(find.text('1'), findsOneWidget);
+  });
+}
+ */
+====================================================================================================
