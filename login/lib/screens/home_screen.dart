@@ -22,15 +22,15 @@ class HomeScreen extends StatelessWidget {
             const Text(
               'WELCOME',
               style: TextStyle(
-                fontSize: 32,
+                fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
             Image.asset(
               'assets/imgs/login.jpg',
-              height: 150,
-              width: 150,
+              height: 300,
+              width: 300,
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                       builder: (context) => const RegistrarScreen()),
                 );
               },
-              child: const Text('REGISTRAR'),
+              child: const Text('REGISTRARSE'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.buttonBrownColor,
               ),

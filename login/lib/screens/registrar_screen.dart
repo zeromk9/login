@@ -40,7 +40,7 @@ class RegistrarScreen extends StatelessWidget {
                 // Función a ejecutar al hacer clic en "REGISTRAR"
                 // Por ahora, no haremos nada.
               },
-              child: const Text('REGISTRAR'),
+              child: const Text('REGISTRARSE'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.buttonBrownColor,
               ),

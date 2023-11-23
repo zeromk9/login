@@ -55,7 +55,7 @@ class LoginScreen extends StatelessWidget {
                       builder: (context) => const RegistrarScreen()),
                 );
               },
-              child: const Text('REGISTRAR'),
+              child: const Text('REGISTRARSE'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.buttonBrownColor,
               ),
