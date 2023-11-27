@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'registrar_screen.dart';
-import 'package:login/Colors/app_colors.dart';
+import '/Colors/app_colors.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
