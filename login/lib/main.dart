@@ -1,25 +1,27 @@
-// ignore_for_file: prefer_const_constructors
-
+// main.dart
 import 'package:flutter/material.dart';
-import 'package:login/screens/check_auth_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/screens.dart';
 import 'services/services.dart';
+import 'providers/providers.dart';
 
-void main() => runApp(AppState());
+void main() => runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => AuthService()),
+          ChangeNotifierProvider(create: (_) => TemaManager()),
+        ],
+        child: const AppState(),
+      ),
+    );
 
 class AppState extends StatelessWidget {
   const AppState({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthService()),
-      ],
-      child: MyApp(),
-    );
+    return const MyApp();
   }
 }
 
@@ -33,10 +35,11 @@ class MyApp extends StatelessWidget {
       title: 'LOGIN TO MY APP',
       initialRoute: 'home',
       routes: {
-        'login': (_) => LoginScreen(),
-        'register': (_) => RegistrarScreen(),
-        'home': (_) => HomeScreen(),
-        'checking': (_) => CheckAuthScreen()
+        'login': (_) => const LoginScreen(),
+        'register': (_) => const RegistrarScreen(),
+        'home': (_) => const HomeScreen(),
+        'checking': (_) => const CheckAuthScreen(),
+        'main': (_) => const MainScreen(),
       },
       scaffoldMessengerKey: NotificationsService.messengerKey,
       theme: ThemeData.light().copyWith(

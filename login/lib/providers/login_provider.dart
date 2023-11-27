@@ -1,3 +1,5 @@
+// login_provider.dart
+
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
@@ -14,6 +16,14 @@ class LoginFormProvider extends ChangeNotifier {
   set isLoading(bool value) {
     _isLoading = value;
     notifyListeners();
+  }
+
+  Future<String?> getEmail() async {
+    // Puedes agregar lógica adicional aquí si es necesario.
+    // Por ejemplo, podrías realizar una llamada a la base de datos o autenticación.
+
+    // Simplemente retornamos el email, pero podrías personalizarlo según tus necesidades.
+    return email.isNotEmpty ? email : null;
   }
 
   bool isValidForm() {
