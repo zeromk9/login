@@ -1,8 +1,12 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, use_build_context_synchronously, unnecessary_new
 
 import 'package:flutter/material.dart';
-import 'registrar_screen.dart';
-import '/Colors/app_colors.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/login_provider.dart';
+import '../services/services.dart';
+import '../ui/input_decorations.dart';
+import '../widgets/widgets.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -10,58 +14,135 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-        backgroundColor: AppColors.accentColor,
-      ),
-      body: Center(
+      // body: AuthBackground(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: const InputDecoration(
-                  hintText: 'Email',
+            const SizedBox(height: 250),
+            CardContainer(
+              child: Column(
+                children: [
+                  const SizedBox(height: 10),
+                  Text('Login',
+                      style: Theme.of(context).textTheme.headlineMedium),
+                  const SizedBox(height: 30),
+                  ChangeNotifierProvider(
+                    create: (_) => LoginFormProvider(),
+                    child: _LoginForm(),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 50),
+            TextButton(
+              onPressed: () =>
+                  Navigator.pushReplacementNamed(context, 'register'),
+              style: ButtonStyle(
+                overlayColor: MaterialStateProperty.all(
+                  Colors.redAccent.withOpacity(0.1),
                 ),
+                shape: MaterialStateProperty.all(StadiumBorder()),
+              ),
+              child: const Text(
+                'Crear una nueva cuenta',
+                style: TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  hintText: 'Password',
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Función a ejecutar al hacer clic en "LOGIN"
-                // Por ahora, no haremos nada.
-              },
-              child: const Text('LOGIN'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.buttonGreenColor,
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const RegistrarScreen()),
-                );
-              },
-              child: const Text('REGISTRARSE'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.buttonBrownColor,
-              ),
-            ),
+            const SizedBox(height: 50),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _LoginForm extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final loginForm = Provider.of<LoginFormProvider>(context);
+
+    return Form(
+      key: loginForm.formKey,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      child: Column(
+        children: [
+          TextFormField(
+            autocorrect: false,
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecorations.authInputDecoration(
+              hintText: 'test1@email.com',
+              labelText: 'Correo electrónico',
+              prefixIcon: Icons.alternate_email_rounded,
+            ),
+            onChanged: (value) => loginForm.email = value,
+            validator: (value) {
+              String pattern =
+                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+              RegExp regExp = new RegExp(pattern);
+
+              return regExp.hasMatch(value ?? '')
+                  ? null
+                  : 'El valor ingresado no luce como un correo';
+            },
+          ),
+          const SizedBox(height: 30),
+          TextFormField(
+            autocorrect: false,
+            obscureText: true,
+            keyboardType: TextInputType.emailAddress,
+            decoration: InputDecorations.authInputDecoration(
+              hintText: 'Test1@',
+              labelText: 'Contraseña',
+              prefixIcon: Icons.lock_outline,
+            ),
+            onChanged: (value) => loginForm.password = value,
+            validator: (value) {
+              return (value != null && value.length >= 6)
+                  ? null
+                  : 'La contraseña debe ser de 6 caracteres';
+            },
+          ),
+          const SizedBox(height: 30),
+          MaterialButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            disabledColor: Colors.grey,
+            elevation: 0,
+            color: Colors.redAccent,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+              child: Text(
+                loginForm.isLoading ? 'Espere' : 'Ingresar',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            onPressed: loginForm.isLoading
+                ? null
+                : () async {
+                    FocusScope.of(context).unfocus();
+                    final authService =
+                        Provider.of<AuthService>(context, listen: false);
+
+                    if (!loginForm.isValidForm()) return;
+
+                    loginForm.isLoading = true;
+
+                    final String? errorMessage = await authService.login(
+                      loginForm.email,
+                      loginForm.password,
+                    );
+
+                    if (errorMessage == null) {
+                      Navigator.pushReplacementNamed(context, 'home');
+                    } else {
+                      // print( errorMessage );
+                      NotificationsService.showSnackbar(errorMessage);
+                      loginForm.isLoading = false;
+                    }
+                  },
+          ),
+        ],
       ),
     );
   }

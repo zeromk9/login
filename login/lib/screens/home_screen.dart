@@ -4,16 +4,27 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'registrar_screen.dart';
 import '/Colors/app_colors.dart';
+import '/services/services.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('My App'),
         backgroundColor: AppColors.primaryColor,
+        leading: IconButton(
+          icon: const Icon(Icons.login_outlined),
+          onPressed: () {
+            authService.logout();
+            Navigator.pushReplacementNamed(context, 'login');
+          },
+        ),
       ),
       body: Center(
         child: Column(
@@ -37,7 +48,7 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
                 );
               },
               child: const Text('LOGIN'),
@@ -50,8 +61,7 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const RegistrarScreen()),
+                  MaterialPageRoute(builder: (context) => RegistrarScreen()),
                 );
               },
               child: const Text('REGISTRARSE'),
