@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
 import 'package:flutter/material.dart';
-import 'package:login/Colors/app_colors.dart';
+import '/Colors/app_colors.dart';
 
 class RegistrarScreen extends StatelessWidget {
   const RegistrarScreen({super.key});
