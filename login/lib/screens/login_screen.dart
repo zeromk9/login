@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, use_build_context_synchronously, unnecessary_new
+// ignore_for_file: prefer_const_constructors, unnecessary_new, sort_child_properties_last, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,14 +7,14 @@ import '../providers/login_provider.dart';
 import '../services/services.dart';
 import '../ui/input_decorations.dart';
 import '../widgets/widgets.dart';
+import '../Colors/app_colors.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: AuthBackground(
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -39,13 +39,14 @@ class LoginScreen extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, 'register'),
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(
-                  Colors.redAccent.withOpacity(0.1),
+                  AppColors.buttonBrownColor.withOpacity(0.1),
                 ),
                 shape: MaterialStateProperty.all(StadiumBorder()),
               ),
               child: const Text(
                 'Crear una nueva cuenta',
-                style: TextStyle(fontSize: 18, color: Colors.white),
+                style:
+                    TextStyle(fontSize: 18, color: AppColors.firePrimaryColor),
               ),
             ),
             const SizedBox(height: 50),
@@ -107,14 +108,14 @@ class _LoginForm extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            disabledColor: Colors.grey,
+            disabledColor: AppColors.accentColor,
             elevation: 0,
-            color: Colors.redAccent,
+            color: AppColors.buttonGreenColor,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
               child: Text(
                 loginForm.isLoading ? 'Espere' : 'Ingresar',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: AppColors.fireSecondaryColor),
               ),
             ),
             onPressed: loginForm.isLoading
@@ -136,7 +137,6 @@ class _LoginForm extends StatelessWidget {
                     if (errorMessage == null) {
                       Navigator.pushReplacementNamed(context, 'main');
                     } else {
-                      // print( errorMessage );
                       NotificationsService.showSnackbar(errorMessage);
                       loginForm.isLoading = false;
                     }

@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'login_screen.dart';
 import 'registrar_screen.dart';
 import '/Colors/app_colors.dart';
+import '/providers/providers.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,6 +16,15 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('My App'),
         backgroundColor: AppColors.primaryColor,
+        actions: [
+          // Botón para cambiar el tema
+          IconButton(
+            icon: const Icon(Icons.palette),
+            onPressed: () {
+              _mostrarDialogoCambioTema(context);
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -63,5 +74,48 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // Método para mostrar un diálogo para cambiar el tema
+  void _mostrarDialogoCambioTema(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Cambiar tema'),
+          content: Column(
+            children: [
+              ListTile(
+                title: const Text('Original'),
+                onTap: () {
+                  _cambiarTema(context, Tema.original);
+                },
+              ),
+              ListTile(
+                title: const Text('Hielo'),
+                onTap: () {
+                  _cambiarTema(context, Tema.hielo);
+                },
+              ),
+              ListTile(
+                title: const Text('Fuego'),
+                onTap: () {
+                  _cambiarTema(context, Tema.fuego);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // Método para cambiar el tema usando TemaManager
+  void _cambiarTema(BuildContext context, Tema nuevoTema) {
+    final temaManager = Provider.of<TemaManager>(context, listen: false);
+    temaManager.cambiarTema(nuevoTema);
+
+    // Cerrar el diálogo
+    Navigator.pop(context);
   }
 }

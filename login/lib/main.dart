@@ -35,18 +35,27 @@ class MyApp extends StatelessWidget {
       title: 'LOGIN TO MY APP',
       initialRoute: 'home',
       routes: {
-        'login': (_) => const LoginScreen(),
-        'register': (_) => const RegistrarScreen(),
-        'home': (_) => const HomeScreen(),
         'checking': (_) => const CheckAuthScreen(),
+        'home': (_) => const HomeScreen(),
+        'login': (_) => const LoginScreen(),
         'main': (_) => const MainScreen(),
+        'register': (_) => const RegistrarScreen(),
       },
       scaffoldMessengerKey: NotificationsService.messengerKey,
-      theme: ThemeData.light().copyWith(
-          scaffoldBackgroundColor: Colors.black54,
-          appBarTheme: const AppBarTheme(elevation: 0, color: Colors.redAccent),
-          floatingActionButtonTheme: const FloatingActionButtonThemeData(
-              backgroundColor: Colors.redAccent, elevation: 0)),
+      theme: _getTheme(context),
+    );
+  }
+
+  ThemeData _getTheme(BuildContext context) {
+    final temaManager = Provider.of<TemaManager>(context);
+
+    return temaManager.tema.copyWith(
+      scaffoldBackgroundColor: Colors.black54,
+      appBarTheme: const AppBarTheme(elevation: 0, color: Colors.redAccent),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: Colors.redAccent,
+        elevation: 0,
+      ),
     );
   }
 }

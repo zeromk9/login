@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/Colors/app_colors.dart';
+import '../Colors/app_colors.dart';
 import '../providers/login_provider.dart';
 import '../services/services.dart';
 import '../ui/input_decorations.dart';
@@ -44,13 +44,14 @@ class RegistrarScreen extends StatelessWidget {
               onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(
-                  Colors.redAccent.withOpacity(0.1),
+                  AppColors.fireAccentColor.withOpacity(0.1),
                 ),
                 shape: MaterialStateProperty.all(StadiumBorder()),
               ),
               child: Text(
                 '¿Ya tienes una cuenta?',
-                style: TextStyle(fontSize: 18, color: Colors.white),
+                style:
+                    TextStyle(fontSize: 18, color: AppColors.iceSecondaryColor),
               ),
             ),
             SizedBox(height: 50),
@@ -109,14 +110,14 @@ class _LoginForm extends StatelessWidget {
           MaterialButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
-              disabledColor: Colors.grey,
+              disabledColor: AppColors.iceSecondaryColor,
               elevation: 0,
-              color: Colors.redAccent,
+              color: AppColors.primaryColor,
               child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
                   child: Text(
                     loginForm.isLoading ? 'Espere' : 'Ingresar',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: AppColors.iceSecondaryColor),
                   )),
               onPressed: loginForm.isLoading
                   ? null

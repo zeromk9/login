@@ -18,14 +18,6 @@ class LoginFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<String?> getEmail() async {
-    // Puedes agregar lógica adicional aquí si es necesario.
-    // Por ejemplo, podrías realizar una llamada a la base de datos o autenticación.
-
-    // Simplemente retornamos el email, pero podrías personalizarlo según tus necesidades.
-    return email.isNotEmpty ? email : null;
-  }
-
   bool isValidForm() {
     print(formKey.currentState?.validate());
 
