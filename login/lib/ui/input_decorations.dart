@@ -10,25 +10,24 @@ class InputDecorations {
     return InputDecoration(
       enabledBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
-          color: AppColors.accentColor, // Cambiado a accentColor de AppColors
+          color: AppColors.mhwblack, //color lineas
         ),
       ),
       focusedBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
-          color: AppColors.accentColor, // Cambiado a accentColor de AppColors
+          color: AppColors.primaryColor, //color focus linea
           width: 2,
         ),
       ),
       hintText: hintText,
       labelText: labelText,
       labelStyle: const TextStyle(
-        color: Colors.black,
+        color: AppColors.iceAccentColor, //color de labels email y password
       ),
       prefixIcon: prefixIcon != null
           ? Icon(
               prefixIcon,
-              color:
-                  AppColors.accentColor, // Cambiado a accentColor de AppColors
+              color: AppColors.buttonGreenColor, //color iconos
             )
           : null,
     );

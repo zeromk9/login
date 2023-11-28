@@ -21,6 +21,10 @@ class AppColors {
   static const Color fireSecondaryColor = Color(0xFFBDBDBD); // Gris claro
   static const Color fireButtonGreenColor = Color(0xFF388E3C); // Verde oscuro
 
+  //Colores normales:
+  static const Color mhwhite = Colors.white;
+  static const Color mhwblack = Colors.black;
+
   // Estilos de texto para cada tema
   static const TextStyle titulo = TextStyle(
     fontSize: 24,

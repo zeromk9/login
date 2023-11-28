@@ -14,8 +14,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My App'),
-        backgroundColor: AppColors.primaryColor,
+        title: const Text('MONSTER HUNTER'),
+        backgroundColor: AppColors.accentColor,
         actions: [
           // Botón para cambiar el tema
           IconButton(
@@ -31,10 +31,11 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'WELCOME',
+              'WELCOME HUNTER',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
+                color: AppColors.fireSecondaryColor,
               ),
             ),
             const SizedBox(height: 20),
@@ -65,9 +66,9 @@ class HomeScreen extends StatelessWidget {
                       builder: (context) => const RegistrarScreen()),
                 );
               },
-              child: const Text('REGISTRARSE'),
+              child: const Text('REGISTER A NEW HUNTER'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.buttonBrownColor,
+                backgroundColor: AppColors.firePrimaryColor,
               ),
             ),
           ],

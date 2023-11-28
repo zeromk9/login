@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, avoid_print, use_build_context_synchronously
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,28 +10,49 @@ import '../providers/login_provider.dart';
 import '../services/services.dart';
 import '../ui/input_decorations.dart';
 import '../widgets/widgets.dart';
+import '../memes/memes.dart';
 
 class RegistrarScreen extends StatelessWidget {
   const RegistrarScreen({super.key});
+
+  // Función para obtener un mensaje aleatorio de la lista
+  String getRandomMessage() {
+    final Random random = Random();
+    return RegisterMessages
+        .rmessages[random.nextInt(RegisterMessages.rmessages.length)];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Registrar'),
-        backgroundColor: AppColors.secondaryColor,
+        title: Text(
+          getRandomMessage(),
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        backgroundColor: AppColors.firePrimaryColor,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 250),
+            SizedBox(height: 16),
+            Image.asset(
+              'assets/imgs/newdevil.gif',
+              width: 400,
+              height: 400,
+            ),
+            SizedBox(height: 16),
             CardContainer(
               child: Column(
                 children: [
                   SizedBox(height: 10),
                   Text(
-                    'Crear cuenta',
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    'CREATE A NEW HUNTER',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          color: AppColors.mhwblack,
+                        ),
                   ),
                   SizedBox(height: 30),
                   ChangeNotifierProvider(
@@ -44,14 +67,14 @@ class RegistrarScreen extends StatelessWidget {
               onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(
-                  AppColors.fireAccentColor.withOpacity(0.1),
+                  AppColors.mhwhite.withOpacity(0.2),
                 ),
                 shape: MaterialStateProperty.all(StadiumBorder()),
               ),
               child: Text(
-                '¿Ya tienes una cuenta?',
+                'ARE YOU ALREADY A HUNTER?',
                 style:
-                    TextStyle(fontSize: 18, color: AppColors.iceSecondaryColor),
+                    TextStyle(fontSize: 25, color: AppColors.buttonGreenColor),
               ),
             ),
             SizedBox(height: 50),
@@ -77,7 +100,7 @@ class _LoginForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecorations.authInputDecoration(
                 hintText: 'test1@email.com',
-                labelText: 'Correo electrónico',
+                labelText: 'Email Address',
                 prefixIcon: Icons.alternate_email_rounded),
             onChanged: (value) => loginForm.email = value,
             validator: (value) {
@@ -87,7 +110,7 @@ class _LoginForm extends StatelessWidget {
 
               return regExp.hasMatch(value ?? '')
                   ? null
-                  : 'El valor ingresado no luce como un correo';
+                  : 'A invalid email format, example of valid format: name123@email.com';
             },
           ),
           SizedBox(height: 30),
@@ -97,13 +120,13 @@ class _LoginForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecorations.authInputDecoration(
                 hintText: 'Test1@',
-                labelText: 'Contraseña',
+                labelText: 'Password',
                 prefixIcon: Icons.lock_outline),
             onChanged: (value) => loginForm.password = value,
             validator: (value) {
               return (value != null && value.length >= 6)
                   ? null
-                  : 'La contraseña debe de ser de 6 caracteres';
+                  : 'The password must be 6 characters long';
             },
           ),
           SizedBox(height: 30),
@@ -112,12 +135,12 @@ class _LoginForm extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10)),
               disabledColor: AppColors.iceSecondaryColor,
               elevation: 0,
-              color: AppColors.primaryColor,
+              color: AppColors.firePrimaryColor,
               child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
                   child: Text(
-                    loginForm.isLoading ? 'Espere' : 'Ingresar',
-                    style: TextStyle(color: AppColors.iceSecondaryColor),
+                    loginForm.isLoading ? 'WAIT...' : 'REGISTER',
+                    style: TextStyle(color: AppColors.mhwhite),
                   )),
               onPressed: loginForm.isLoading
                   ? null

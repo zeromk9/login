@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_new, sort_child_properties_last, use_build_context_synchronously
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,23 +10,48 @@ import '../services/services.dart';
 import '../ui/input_decorations.dart';
 import '../widgets/widgets.dart';
 import '../Colors/app_colors.dart';
+import '../memes/memes.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
+  // Función para obtener un mensaje aleatorio de la lista
+  String getRandomMessage() {
+    final Random random = Random();
+    return LoginMessages
+        .messages[random.nextInt(LoginMessages.messages.length)];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          getRandomMessage(),
+          style: TextStyle(fontSize: 16),
+        ),
+        backgroundColor: AppColors.buttonGreenColor,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 250),
+            const SizedBox(height: 16),
+            Image.asset(
+              'assets/imgs/prodevil.gif',
+              width: 400,
+              height: 400,
+            ),
+            const SizedBox(height: 16),
             CardContainer(
               child: Column(
                 children: [
                   const SizedBox(height: 10),
-                  Text('Login',
-                      style: Theme.of(context).textTheme.headlineMedium),
+                  Text(
+                    'HUNT ENTRY',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                          color: AppColors.mhwblack,
+                        ),
+                  ),
                   const SizedBox(height: 30),
                   ChangeNotifierProvider(
                     create: (_) => LoginFormProvider(),
@@ -39,14 +66,14 @@ class LoginScreen extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, 'register'),
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(
-                  AppColors.buttonBrownColor.withOpacity(0.1),
+                  AppColors.mhwhite.withOpacity(0.1),
                 ),
                 shape: MaterialStateProperty.all(StadiumBorder()),
               ),
               child: const Text(
-                'Crear una nueva cuenta',
+                'REGISTER A NEW HUNTER',
                 style:
-                    TextStyle(fontSize: 18, color: AppColors.firePrimaryColor),
+                    TextStyle(fontSize: 25, color: AppColors.firePrimaryColor),
               ),
             ),
             const SizedBox(height: 50),
@@ -72,7 +99,7 @@ class _LoginForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecorations.authInputDecoration(
               hintText: 'test1@email.com',
-              labelText: 'Correo electrónico',
+              labelText: 'Email Address',
               prefixIcon: Icons.alternate_email_rounded,
             ),
             onChanged: (value) => loginForm.email = value,
@@ -83,7 +110,7 @@ class _LoginForm extends StatelessWidget {
 
               return regExp.hasMatch(value ?? '')
                   ? null
-                  : 'El valor ingresado no luce como un correo';
+                  : 'A Invalid Email Format';
             },
           ),
           const SizedBox(height: 30),
@@ -93,14 +120,14 @@ class _LoginForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecorations.authInputDecoration(
               hintText: 'Test1@',
-              labelText: 'Contraseña',
+              labelText: 'Password',
               prefixIcon: Icons.lock_outline,
             ),
             onChanged: (value) => loginForm.password = value,
             validator: (value) {
               return (value != null && value.length >= 6)
                   ? null
-                  : 'La contraseña debe ser de 6 caracteres';
+                  : 'The password must be 6 characters long';
             },
           ),
           const SizedBox(height: 30),
@@ -108,14 +135,14 @@ class _LoginForm extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            disabledColor: AppColors.accentColor,
+            disabledColor: AppColors.icePrimaryColor,
             elevation: 0,
             color: AppColors.buttonGreenColor,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
               child: Text(
-                loginForm.isLoading ? 'Espere' : 'Ingresar',
-                style: TextStyle(color: AppColors.fireSecondaryColor),
+                loginForm.isLoading ? 'WAIT...' : 'LOGIN',
+                style: TextStyle(color: AppColors.mhwhite),
               ),
             ),
             onPressed: loginForm.isLoading
