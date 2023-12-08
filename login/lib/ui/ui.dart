@@ -1,1 +1,1 @@
-export '../ui/input_decorations.dart';
+export 'input_decorations.dart';

@@ -1,3 +1,3 @@
-export '../memes/login_msn.dart';
-export '../memes/register_msn.dart';
-export '../memes/ingame_msn.dart';
+export 'login_msn.dart';
+export 'register_msn.dart';
+export 'ingame_msn.dart';
