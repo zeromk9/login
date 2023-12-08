@@ -1,2 +1,3 @@
-export '../providers/login_provider.dart';
-export '../providers/theme_color_provider.dart';
+export 'login_provider.dart';
+export 'theme_color_provider.dart';
+export 'monsters_provider.dart';

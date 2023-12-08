@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../memes/memes.dart'; // Asegúrate de importar tus mensajes
+import '/memes/memes.dart'; // Asegúrate de importar tus mensajes
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

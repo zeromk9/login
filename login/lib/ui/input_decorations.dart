@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Colors/app_colors.dart';
+import '/Colors/app_colors.dart';
 
 class InputDecorations {
   static InputDecoration authInputDecoration({

@@ -5,12 +5,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/login_provider.dart';
-import '../services/services.dart';
-import '../ui/input_decorations.dart';
-import '../widgets/widgets.dart';
-import '../Colors/app_colors.dart';
-import '../memes/memes.dart';
+import '/providers/login_provider.dart';
+import '/services/services.dart';
+import '/ui/input_decorations.dart';
+import '/widgets/widgets.dart';
+import '/Colors/app_colors.dart';
+import '/memes/memes.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
