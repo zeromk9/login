@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '/memes/memes.dart'; // Asegúrate de importar tus mensajes
+import '/memes/memes.dart';
+import '/screens/screens.dart';
+import '/Colors/app_colors.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -29,6 +31,29 @@ class WelcomeScreen extends StatelessWidget {
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MonsterScreen(),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.firePrimaryColor,
+                textStyle: const TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  letterSpacing: 3.0,
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              ),
+              child: const Text('MONSTERS'),
             ),
           ],
         ),

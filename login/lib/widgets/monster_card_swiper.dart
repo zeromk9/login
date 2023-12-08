@@ -22,8 +22,8 @@ class MonsterCardSwiper extends StatelessWidget {
             final monster = monsters[index];
             return GestureDetector(
               onTap: () {
-                //print("Pushing to details screen");
-                Navigator.pushNamed(context, '/details', arguments: monster);
+                Navigator.pushNamed(context, 'monster_details',
+                    arguments: monster);
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),

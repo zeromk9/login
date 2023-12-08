@@ -57,6 +57,8 @@ flutter:
   assets:
   #Imagenes:
     - assets/imgs/
+    - assets/imgs/monsters/
+    
 
   uses-material-design: true
 

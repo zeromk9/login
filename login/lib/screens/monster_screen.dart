@@ -70,9 +70,7 @@ class MonsterScreen extends StatelessWidget {
       body: Consumer<MonstersProvider>(
         builder: (_, provider, __) {
           if (provider.onDisplayMonsters.isEmpty) {
-            return const Center(
-                child:
-                    CircularProgressIndicator()); // Muestra un indicador de carga mientras se obtienen los datos.
+            return const Center(child: CircularProgressIndicator());
           } else {
             return Column(
               children: [
