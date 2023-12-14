@@ -1,5 +1,13 @@
+// monster_details_screen.dart
+
+// ignore_for_file: prefer_const_constructors, avoid_print
+
 import 'package:flutter/material.dart';
+// import 'package:login/data/monster_names.dart';
+import 'package:provider/provider.dart';
 import '/models/models.dart';
+// import '/providers/providers.dart';
+import '/services/services.dart';
 
 class MonsterDetailsScreen extends StatefulWidget {
   const MonsterDetailsScreen({super.key});
@@ -9,6 +17,26 @@ class MonsterDetailsScreen extends StatefulWidget {
 }
 
 class _MonsterDetailsScreenState extends State<MonsterDetailsScreen> {
+  bool isFavorite = false;
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      final authService = Provider.of<AuthService>(context, listen: false);
+      final Map<String, dynamic> args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      final Monster monster = args['monster'];
+      final String userEmail = args['userEmail'];
+
+      // Verificar si el juego es favorito y asignar a isFavorite
+      authService.existeMonsterFavorito(userEmail, monster.name).then((exists) {
+        setState(() {
+          isFavorite = exists;
+        });
+      });
+    });
+  }
+
   bool isTextVisible = true;
   void toggleTextVisibility() {
     setState(() {
@@ -18,11 +46,26 @@ class _MonsterDetailsScreenState extends State<MonsterDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Monster monster =
-        ModalRoute.of(context)?.settings.arguments as Monster;
-
+    final Map<String, dynamic> args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final Monster monster = args['monster'];
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.orange, title: Text(monster.name)),
+      appBar: AppBar(
+        backgroundColor: Colors.orange,
+        title: Text(monster.name),
+        actions: [
+          IconButton(
+            icon: Icon(
+              isFavorite == true ? Icons.favorite : Icons.favorite_border,
+              color: Color.fromARGB(255, 168, 24, 24),
+              size: 30,
+            ),
+            onPressed: () {
+              toggleFavorite();
+            },
+          ),
+        ],
+      ),
       body: CustomScrollView(
         slivers: [
           SliverList(
@@ -35,6 +78,33 @@ class _MonsterDetailsScreenState extends State<MonsterDetailsScreen> {
         ],
       ),
     );
+  }
+
+  void toggleFavorite() {
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+
+    //print(isFavorite);
+    final Map<String, dynamic> args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final Monster monster = args['monster'];
+    final String userEmail = args['userEmail'];
+
+    // isFavorite = !isFavorite;
+    String monsterName = monster.name;
+
+    final authService = Provider.of<AuthService>(context, listen: false);
+    // print(userEmail);
+    // print(monsterName);
+    // Llama a la función correspondiente en tu servicio
+    if (isFavorite == true) {
+      // print('entra');
+      authService.agregarMonsterFavorito(userEmail, monsterName);
+    } else if (isFavorite == false) {
+      // print('entre en else');
+      authService.quitarMonsterFavorito(userEmail, monsterName);
+    }
   }
 }
 
@@ -79,21 +149,16 @@ class _MonsterImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Image.asset(
-        'assets/imgs/monsters/$name.jpg', // Ruta de la imagen del monstruo
-        fit: BoxFit
-            .cover, // Ajustar la imagen para que se vea completa sin importar el tamaño original
-        width:
-            250, // Tamaño específico para la imagen (ajústalo según tus necesidades)
-        height:
-            250, // Tamaño específico para la imagen (ajústalo según tus necesidades)
+        'assets/imgs/monsters/$name.jpg',
+        fit: BoxFit.cover,
+        width: 250,
+        height: 250,
         errorBuilder: (context, error, stackTrace) {
-          // En caso de error al cargar la imagen, cargar la imagen de respaldo
           return Image.asset(
-            'assets/imgs/nodata.jpg', // Ruta de la imagen de respaldo
-            fit: BoxFit
-                .cover, // Ajustar la imagen de respaldo de la misma manera
-            width: 250, // Tamaño específico para la imagen de respaldo
-            height: 250, // Tamaño específico para la imagen de respaldo
+            'assets/imgs/nodata.jpg',
+            fit: BoxFit.cover,
+            width: 250,
+            height: 250,
           );
         },
       ),

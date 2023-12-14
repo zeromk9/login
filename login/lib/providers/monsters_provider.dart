@@ -1,3 +1,5 @@
+// monster_provider.dart
+
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
@@ -8,6 +10,7 @@ import '/models/models.dart';
 class MonstersProvider extends ChangeNotifier {
   final String _baseUrl = 'mhw-db.com';
   List<Monster> onDisplayMonsters = [];
+  List<Monster> favoriteMonsters = [];
 
   Future<void> getMonsterInfo({List<String>? names}) async {
     String monsters = 'monsters';
@@ -27,15 +30,6 @@ class MonstersProvider extends ChangeNotifier {
         } else {
           onDisplayMonsters = monsterInfo.info;
         }
-
-        // Imprimir la lista solo la primera vez que se obtienen los datos
-/*         if (!_isListPrinted) {
-          print('Lista de monstruos obtenida de la API:');
-          onDisplayMonsters.forEach((monster) {
-            print('ID: ${monster.id}, Nombre: ${monster.name}');
-          });
-          _isListPrinted = true;
-        } */
 
         notifyListeners();
       } else {

@@ -1,5 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
-
+// home_screen.dart
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 import 'registrar_screen.dart';
@@ -41,10 +40,10 @@ class HomeScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const LoginScreen()),
                 );
               },
-              child: const Text('LOGIN'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.buttonGreenColor,
               ),
+              child: const Text('LOGIN'),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -55,10 +54,10 @@ class HomeScreen extends StatelessWidget {
                       builder: (context) => const RegistrarScreen()),
                 );
               },
-              child: const Text('REGISTER A NEW HUNTER'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.firePrimaryColor,
               ),
+              child: const Text('REGISTER A NEW HUNTER'),
             ),
           ],
         ),

@@ -9,29 +9,22 @@ import 'providers/providers.dart';
 void main() => runApp(
       MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => AuthService()),
-          ChangeNotifierProvider(create: (_) => TemaManager()),
+          ChangeNotifierProvider(
+            create: (_) => MonstersProvider(),
+            lazy: false,
+          ),
+          ChangeNotifierProvider(
+            create: (_) => AuthService(),
+            lazy: false,
+          ),
+          ChangeNotifierProvider(
+            create: (_) => TemaManager(),
+            lazy: false,
+          ),
         ],
-        child: const AppState(),
+        child: const MyApp(),
       ),
     );
-
-class AppState extends StatelessWidget {
-  const AppState({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => MonstersProvider(),
-          lazy: false,
-        )
-      ],
-      child: const MyApp(),
-    );
-  }
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -50,6 +43,7 @@ class MyApp extends StatelessWidget {
         'monster': (_) => const MonsterScreen(),
         'register': (_) => const RegistrarScreen(),
         'welcome': (_) => const WelcomeScreen(),
+        'monster_favorites': (_) => const MonsterFavoritesScreen(),
       },
       scaffoldMessengerKey: NotificationsService.messengerKey,
       theme: _getTheme(context),

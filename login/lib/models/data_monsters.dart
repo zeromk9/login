@@ -7,13 +7,26 @@ class Monster {
   String species;
   String name;
   String description;
+  bool isFavorite; // Nueva propiedad
 
   Monster({
     required this.id,
     required this.species,
     required this.name,
     required this.description,
+    this.isFavorite = false,
   });
+
+  void toggleFavorite() {
+    isFavorite = !isFavorite;
+  }
+
+  get monsterImage {
+    if (id != null) {
+      return 'assets/imgs/monsters/$id.jpg';
+    }
+    return 'assets/imgs/monsters/Deviljho.jpg';
+  }
 
   Future<String?> getImagePath(String imageName) async {
     // Obtener el directorio de documentos de la aplicación

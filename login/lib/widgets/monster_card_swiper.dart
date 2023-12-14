@@ -1,13 +1,18 @@
+// monster_card_swiper.dart
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import '/models/models.dart';
 
 class MonsterCardSwiper extends StatelessWidget {
   final List<Monster> monsters;
-  const MonsterCardSwiper({super.key, required this.monsters});
+  final String userEmail;
+  const MonsterCardSwiper(
+      {Key? key, required this.monsters, required this.userEmail})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // print(userEmail);
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: SizedBox(
@@ -23,7 +28,7 @@ class MonsterCardSwiper extends StatelessWidget {
             return GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, 'monster_details',
-                    arguments: monster);
+                    arguments: {'monster': monster, 'userEmail': userEmail});
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
@@ -36,7 +41,7 @@ class MonsterCardSwiper extends StatelessWidget {
                         monster.name,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 24, // Tamaño grande para el texto
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -44,14 +49,14 @@ class MonsterCardSwiper extends StatelessWidget {
                     Image.asset(
                       'assets/imgs/monsters/${monster.name}.jpg',
                       fit: BoxFit.cover,
-                      width: 250,
-                      height: 250,
+                      width: 300,
+                      height: 300,
                       errorBuilder: (context, error, stackTrace) {
                         return Image.asset(
                           'assets/imgs/nodata.jpg',
                           fit: BoxFit.cover,
-                          width: 250,
-                          height: 250,
+                          width: 300,
+                          height: 300,
                         );
                       },
                     ),
