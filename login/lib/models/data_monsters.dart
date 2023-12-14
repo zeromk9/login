@@ -23,7 +23,7 @@ class Monster {
 
   get monsterImage {
     if (id != null) {
-      return 'assets/imgs/monsters/$id.jpg';
+      return 'assets/imgs/monsters/$name.jpg';
     }
     return 'assets/imgs/monsters/Deviljho.jpg';
   }
