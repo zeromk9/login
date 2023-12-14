@@ -73,7 +73,7 @@ class _MonsterFavoritesScreenState extends State<MonsterFavoritesScreen> {
                     print('ontap');
                     print(userEmail);
                     // Navegar a otra pantalla cuando se toca el elemento
-                    Navigator.pushNamed(context, 'details', arguments: {
+                    Navigator.pushNamed(context, 'monster_details', arguments: {
                       'monster': moustro,
                       'userEmail': userEmail
                     }).then((_) {
